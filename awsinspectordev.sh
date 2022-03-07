@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Set sudo super user
-sudo su -
-
 # Installing AWS Inspector on Linux based EC2 instances
 wget https://inspector-agent.amazonaws.com/linux/latest/install
 bash install
@@ -22,12 +19,12 @@ aws s3 cp s3://resilient-dev-falcon-installer/ /home/ec2-user
 INSTALLER= $(aws s3 cp s3://resilient-dev-falcon-installer/ /home/ec2-user )
 if [ -f "$INSTALLER"]; then 
     cd /home/ec2-user
-    chmod u+x install
+    sudo chmod u+x install
     ./install
 else 
     "$INSTALLER" > output.txt
-    mkdir home/ec2-user/falcon
-    mv output.txt home/ec2-user/falcon
+    mkdir falcon
+    mv output.txt falcon
 fi
 
 
