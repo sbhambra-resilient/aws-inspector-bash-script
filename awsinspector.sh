@@ -15,7 +15,10 @@ else
     echo "$FILE does not exist."
 fi 
 
+# Obtaining the install file from the s3 bucket and placing it into generic local directory
+aws s3 cp s3://resilient-dev-falcon-installer/ /home/ec2-user
 
+# If else statement to determine course of action if/if not successful
 INSTALLER= $(aws s3 cp s3://resilient-dev-falcon-installer/ /home/ec2-user )
 if [ -f "$INSTALLER"]; then 
     cd /home/ec2-user
